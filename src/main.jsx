@@ -11,6 +11,9 @@ import Layout from "./Layout";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
 import Contact from "./components/Contact/Contact";
+import User from "./components/User/User";
+import Github, { fetchUsers } from "./components/Github/Github";
+import Demo from "./components/Demo/Demo";
 
 // * Two types of creating an Routes --->
 
@@ -44,8 +47,14 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact-us" element={<Contact />} />
+      <Route path="about" element={<About />} />
+      <Route path="about/demo" element={<Demo />} />
+
+      <Route path="contact-us" element={<Contact />} />
+      <Route path="user/:userId" element={<User />} />
+      <Route loader={fetchUsers} path="github" element={<Github />} />
+
+      {/* There is an <Outlet/> component present in the <Layout/> component by which we are able to render subchildrens in there outlet part ...header and footer are permanent and outlet means layout childrens */}
     </Route>
   )
 );
